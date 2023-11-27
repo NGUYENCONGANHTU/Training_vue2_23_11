@@ -3,6 +3,7 @@
     <p>Count: {{ count }}</p>
     <button class="btn-count" @click="increase">Count</button>
     <button class="btn-reset" @click="reset">Reset</button>
+    <div>{{name}}</div>
   </div>
 </template>
 
@@ -12,7 +13,8 @@ export default {
   name: 'Clock',
   data() {
     return {
-     count:0,
+     count: 0,
+     name: 'Tu',
     };
   },
   computed: {
@@ -22,16 +24,16 @@ export default {
   },
   methods:{
     increase(){ 
-      
       this.count++;
     },
     reset(){
-     
       this.count = '0';
     }
   },
   watch:{
     count: function(newCount){
+      console.log("count change");
+      this.name = 'Minh';
        if( newCount % 10 === 0){
         alert('stop!');
        }
@@ -55,7 +57,5 @@ button{
 .clock{
   background: linear-gradient(blue, violet);;
 }
-body{
-  background-color: black;
-}
+body{}
 </style>
