@@ -1,51 +1,61 @@
 <template>
   <div class="clock">
-    <p>Current Time: {{ currentTime }}</p>
+    <p>Count: {{ count }}</p>
+    <button class="btn-count" @click="increase">Count</button>
+    <button class="btn-reset" @click="reset">Reset</button>
   </div>
 </template>
 
 <script>
+import { watch } from 'vue';
 export default {
   name: 'Clock',
   data() {
     return {
-      time: new Date()
+     count:0,
     };
   },
   computed: {
-    currentTime() {
-      return this.formatTime(this.time);
+    isDivisibleByTen: function () {
+      return this.count % 10 === 0 && this.count !== 0;
     }
   },
-  methods: {
-    formatTime(time) {
-      const hours = time.getHours();
-      const minutes = time.getMinutes();
-      const seconds = time.getSeconds();
-      return `${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
+  methods:{
+    increase(){ 
+      
+      this.count++;
     },
-    padZero(value) {
-      return value < 10 ? `0${value}` : value;
-    },
-    updateTime() {
-      // Update the time every second using setTimeout
-      setTimeout(() => {
-        this.time = new Date();
-        this.updateTime();
-      }, 1000);
+    reset(){
+     
+      this.count = '0';
     }
   },
-  mounted() {
-    // Call the updateTime method when the component is mounted
-    this.updateTime();
+  watch:{
+    count: function(newCount){
+       if( newCount % 10 === 0){
+        alert('stop!');
+       }
+    }
   }
 };
 </script>
 
 <style scoped>
-.clock {
-  font-size: 20px;
-  text-align: center;
-  margin-top: 20px;
+.btn-count{
+  background: green;
+
+}
+button{
+  padding: 10px;
+  outline: none;
+}
+.btn-reset{
+  background: red;
+}
+.clock{
+  background: linear-gradient(blue, violet);;
+}
+body{
+  background-color: black;
 }
 </style>
