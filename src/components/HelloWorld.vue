@@ -1,61 +1,51 @@
 <template>
-  <div class="clock">
-    <p>Count: {{ count }}</p>
-    <button class="btn-count" @click="increase">Count</button>
-    <button class="btn-reset" @click="reset">Reset</button>
-    <div>{{name}}</div>
-  </div>
+  <div id="app">
+  <div id="count">Count: {{ count }}</div>
+  <button class="btn_increment" @click="increment">Count</button>
+  <button class="btn_reset" @click="reset">Reset</button>
+</div>
 </template>
 
 <script>
-import { watch } from 'vue';
 export default {
   name: 'Clock',
   data() {
     return {
-     count: 0,
-     name: 'Tu',
+        count:'0',
     };
-  },
-  computed: {
-    isDivisibleByTen: function () {
-      return this.count % 10 === 0 && this.count !== 0;
-    }
-  },
+  }, 
   methods:{
-    increase(){ 
-      this.count++;
+    increment:function(){
+      if(!isNaN(this.count)){
+        this.count = (parseInt(this.count)+1).toString();
+      }
     },
-    reset(){
-      this.count = '0';
+    reset: function(){
+      this.count='0';
     }
-  },
-  watch:{
+  }, watch:{
     count: function(newCount){
-      console.log("count change");
-      this.name = 'Minh';
-       if( newCount % 10 === 0){
+      if(newCount%10===0){
         alert('stop!');
-       }
+      }
     }
   }
-};
+   }
 </script>
 
 <style scoped>
-.btn-count{
-  background: green;
-
+#app
+{
+  margin-top: 400px;
 }
 button{
-  padding: 10px;
-  outline: none;
+  padding: 5px;
+  margin-top: 20px;
 }
-.btn-reset{
+.btn_increment{
+  background: green;
+}
+.btn_reset{
   background: red;
 }
-.clock{
-  background: linear-gradient(blue, violet);;
-}
-body{}
 </style>

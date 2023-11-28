@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Ex2 from '@/components/Ex2'
+import Clock from '@/components/Clock'
 
 Vue.use(VueRouter)
 
@@ -16,7 +16,7 @@ export default new VueRouter({
     {
       path: '/bt2',
       name: 'BaiTap2',
-      component: Ex2
+      component: Clock
     }
   ]
 })

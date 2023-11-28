@@ -72,10 +72,10 @@ export default {
   mounted() {
     // Call the updateTime method when the component is mounted
     this.updateTime();
-
+        
     this.$watch('timeHengio', (i) => {
       if(i) {
-        
+
       }
     }, { immediate: true });
   }
@@ -83,9 +83,5 @@ export default {
 </script>
 
 <style scoped>
-.clock {
-  font-size: 20px;
-  text-align: center;
-  margin-top: 20px;
-}
+
 </style>
