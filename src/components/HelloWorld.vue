@@ -41,6 +41,7 @@ export default {
 button{
   padding: 5px;
   margin-top: 20px;
+  border-radius: 5px;
 }
 .btn_increment{
   background: green;

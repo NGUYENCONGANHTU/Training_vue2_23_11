@@ -1,87 +1,108 @@
 <template>
-  <div>
+  <div id="app">
     <div class="clock">
-      <p>Current Time: {{ currentTime }}</p>
+      <!-- hiển thị thời gian hiện tại -->
+      <p>Current Time: {{ currentTime }}</p>   
+
     </div>
-    <div id="demo">
-      <h1 id="clock">00:00:00</h1>
+
+    <div id="timer">
+      <!-- hiển thị định dạng của bộ đếm thời gian -->
+      <h1>Timer: {{ timerDisplay }}</h1>
+
       <label for="hours">Giờ:</label>
-      <input type="number" id="hours" min="0" max="23" v-model="hour" />
+      <input type="number" id="hours" min="0" v-model="inputHours" />
       <label for="minutes">Phút:</label>
-      <input type="number" id="minutes" min="0" max="59" v-model="minute" />
+      <input type="number" id="minutes" min="0" v-model="inputMinutes" />
       <label for="seconds">Giây:</label>
-      <input type="number" id="seconds" min="0" max="59" v-model="second" /><br />
-      <button class="SetTimeout" @click="setTimer()">Đặt hẹn giờ</button>
-      <button class="countdown" @click="cancelTimer()">Hủy hẹn giờ</button>
+      <input type="number" id="seconds" min="0" v-model="inputSeconds" /><br />
+
+      <button @click="startTimer" :disabled="timerRunning">Bắt đầu hẹn giờ</button>
+      <button @click="stopTimer" :disabled="!timerRunning">Dừng hẹn giờ</button>
+
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: "Clock",
-  data() {
-    return {
-      time: new Date(),
-      hour: 0,
-      minute: 0,
-      second: 0,
-      timeHengio: null
-    };
-  },
-  computed: {
-    currentTime() {
-      return this.formatTime(this.time);
-    }
-  },
-  methods: {
-    formatTime(time) {
-      const hours = time.getHours();
-      const minutes = time.getMinutes();
-      const seconds = time.getSeconds();
-      return `${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(
-        seconds
-      )}`;
-    },
-    padZero(value) {
-      return value < 10 ? `0${value}` : value;
-    },
-    updateTime() {
-      // Update the time every second using setTimeout
-      setTimeout(() => {
-        this.time = new Date();
-        this.updateTime();
-      }, 1000);
-    },
-    setTimer() {
-      //format hour, minute, second
-      // ...
-      let _tmpTime = new Date();
-      _tmpTime.setHours(this.hour);
-      _tmpTime.setMinutes(this.minute);
-      _tmpTime.setSeconds(this.second);
-      if(_tmpTime > this.time) {
-        this.timeHengio = _tmpTime;
-        alert('Hẹn giờ đã được đặt.');
-      } else {
-        this.timeHengio = null;
-        alert('Vui lòng chọn một thời gian hợp lệ trong tương lai.');
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        time: new Date(), //khai báo 'time' thời gian hiện tại
+        inputHours: 0,    //lấy giờ cho bộ đếm thời gian
+        inputMinutes: 0,  //lấy phút cho bộ đếm thời gian
+        inputSeconds: 0,  //lấy giây cho bộ đếm thời gian
+        timerRunning: false  //Trạng thái của timerRunning
+      },
+      computed: {
+        currentTime() { //hiển thị thời gian hiện tại dưới dạng chuỗi định dạng
+          return this.formatTime(this.time);
+        },
+        timerDisplay() { // Hiển thị giờ/phút/giây cho bộ đếm thời gian dưới dạng chuỗi định dạng.
+          return this.formatTime(new Date(this.inputHours * 3600 * 1000 + this.inputMinutes * 60 * 1000 + this.inputSeconds * 1000));
+        }
+      },
+      watch: {  //theo dõi trạng thái của timerRunning
+        timerRunning(newVal) {
+          if (newVal) {   //khi newVal thay đổi --> startCountdown thay đổi 
+            this.startCountdown();
+          } else {   
+            this.stopCountdown();
+          }
+        }
+      },
+      methods: {
+        formatTime(time) {    // định dạng thời gian
+          const hours = time.getHours();
+          const minutes = time.getMinutes();
+          const seconds = time.getSeconds();
+          return `${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(seconds)}`;
+        },
+        padZero(value) {
+          return value < 10 ? `0${value}` : value;  
+        },
+        updateTime() {  //Lấy thời gian hiện tại
+          this.time = new Date();
+        },  
+        startTimer() {  //Bắt đầu chạy thời gian
+          this.timerRunning = true;
+        },  
+        stopTimer() {   //Dừng chạy thời gian
+          this.timerRunning = false;
+        },
+        startCountdown() {
+          this.countdownInterval = setInterval(() => {
+            if (this.inputHours === 0 && this.inputMinutes === 0 && this.inputSeconds === 0) { //if hour, minutes, second === 0 are stop!!!!
+              this.timerRunning = false;
+              alert('Hẹn giờ đã đến!');
+            } 
+            else 
+            {
+              this.inputSeconds--;
+              if (this.inputSeconds < 0) 
+              {
+                  this.inputSeconds = 59;
+                  this.inputMinutes--;
+                if (this.inputMinutes < 0) 
+                {
+                  this.inputMinutes = 59;
+                  this.inputHours--;
+                }
+              }
+            }
+          }, 1000);
+        },
+        stopCountdown() {
+          clearInterval(this.countdownInterval);
+        }
+      },
+      mounted() {
+        setInterval(() => {
+          this.updateTime();
+        }, 1000);
       }
-    }
-  },
-  mounted() {
-    // Call the updateTime method when the component is mounted
-    this.updateTime();
-        
-    this.$watch('timeHengio', (i) => {
-      if(i) {
-
-      }
-    }, { immediate: true });
-  }
-};
-</script>
-
+    });
+  </script>
 <style scoped>
 
 </style>
+
