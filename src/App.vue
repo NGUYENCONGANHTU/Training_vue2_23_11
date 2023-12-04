@@ -1,15 +1,22 @@
 <template>
   <div id="app">
     <router-view/>
+    <Header/>
+    <Random/>
   </div>
 </template>
 
 <script>
+import Header from './components/Header.vue';
+import Random from './components/Random.vue';
 export default {
-  name: 'App'
+  comments:{
+    Header,
+    Random
+  },
+  name: 'App',
 }
 </script>
-
 <style>
 #app{
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -18,8 +25,5 @@ export default {
   text-align: center;
   font-weight: bold;
   font-size: 20px;
-}
-html{
- background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
 }
 </style>
