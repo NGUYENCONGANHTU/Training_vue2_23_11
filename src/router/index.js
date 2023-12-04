@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import CountPage from '@/pages/count/index.vue'
 import Clock from '@/components/Clock'
 
 Vue.use(VueRouter)
@@ -10,8 +10,8 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'CountPage',
+      component: CountPage
     },
     {
       path: '/bt2',

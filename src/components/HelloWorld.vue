@@ -2,7 +2,6 @@
   <div id="app">
   <div id="count">Count: {{ count }}</div>
   <button class="btn_increment" @click="increment">Count</button>
-  <button class="btn_reset" @click="reset">Reset</button>
 </div>
 </template>
 
