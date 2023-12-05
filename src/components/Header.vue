@@ -2,14 +2,14 @@
 <section>
   <div class="container-fluid">
     <div class="row">
-        <div class="col-6">
-            <img src="https://vietlott.vn/static.vietlott.vn/uploads/images/Logo%20-slogan%20white.jpg?v=11212" alt="" img="img-fluid">
+        <div class="col-5">
+            <img src="@/assets/logo.svg" alt="" img="img-fluid">
         </div>
-        <div class="col-6">
+        <div class="col-7">
             <div class="col"></div>
             <div class="col"></div>
-            <div class="col"> <a href=""><router-link to="/Random">Rondom</router-link></a></div>
-            <div class="col"> <a href=""><router-link to="/Test">Test Nhân Phẩm</router-link></a></div>
+            <div class="col"> <a href=""><router-link to="/2">Random</router-link></a></div>
+            <div class="col"> <a href=""><router-link to="/8">Test Nhân Phẩm</router-link></a></div>
         </div>
     </div>
   </div>
@@ -32,7 +32,7 @@
   </div>
    </div>
    <div class="btn-button">
-    <button>Random</button>
+   <button><router-link to="/2">Random</router-link></button>
    </div>
 </section>
 </template>
@@ -51,26 +51,26 @@ export default {
 
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Hedvig+Letters+Serif:opsz@12..24&family=Poppins:wght@300;400&family=Roboto+Mono:wght@500;600&display=swap');
 
-.container-fluid .row .col-6 img{
-    width: 250px;
-    text-align: center;
+.container-fluid .row .col-5 img{
+    width: 150px;
+    float: left;
 }
 .container-fluid
 {
     border-top: 5px solid red;
 }
-.container-fluid .row .col-6{
+.container-fluid .row .col-7{
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
 }
-.container-fluid .row .col-6 .col a{
+.container-fluid .row .col-7 .col a{
     text-decoration: none;
     color: black;
     font-family: Hedvig Letters Serif;
 }
-.container-fluid .row .col-6 .col a:hover{
+.container-fluid .row .col-7 .col a:hover{
     text-decoration: none;
     color: red;
     font-family: Hedvig Letters Serif;
@@ -94,13 +94,11 @@ span{
 }
 .content__container__list__item {
     list-style: none;
-    animation-name: change;
     animation-duration: 20s;
     animation-iteration-count: infinite;
     font-weight: normal;
     overflow: hidden;
-    margin: 0;
-    line-height: 40px
+    line-height: 40px;
 }
 .container .row .col-6 a{
     text-decoration: none;
@@ -170,19 +168,23 @@ h1{
 }
 .btn-button
 {
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+    display: inline-block;
+    right: 900px;
+    bottom: 50px;
+    position: fixed;  
 }
 button{
-    border-radius: 10px;
-    background-color: red;
-    margin-top: 200px;
-    padding: 5px;
+    border-radius: 40px;
+    background-color: rgb(199, 21, 21);
+    padding: 5px 20px;
+    color: rgb(245, 226, 226);
+    font-family: Hedvig Letters Serif;
+   
+
+}
+button a{
+    text-decoration: none;
     color: white;
-    font-weight: bold;
     font-family: Hedvig Letters Serif;
 
 }

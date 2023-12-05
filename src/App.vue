@@ -1,18 +1,21 @@
 <template>
   <div id="app">
     <router-view/>
-    <Header/>
-    <Random/>
+
+ 
+
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue';
 import Random from './components/Random.vue';
+import Testbody from './components/Testbody.vue';
 export default {
-  comments:{
+  components:{
     Header,
-    Random
+    Random,
+    Testbody,
   },
   name: 'App',
 }
