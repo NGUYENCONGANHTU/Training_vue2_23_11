@@ -12,20 +12,28 @@
                 <div class="col"> <a href=""><router-link to="/8">Test Nhân Phẩm</router-link></a></div>
             </div>
         </div>
+        
     </div>
   <div class="title">
      <h1>{{ title }}</h1>
   </div>
+  <h1>{{ loading === false? 'Bộ số may mắn của bạn là:'  :'Kết quả đang được tính toán!!' }}</h1>
    <div class="time">
-     <div class="items">
-        <div class="number"></div>
-        <div class="number"></div>
-        <div class="number"></div>
-        <div class="number"></div>
-        <div class="number"></div>
-        <div class="number"></div>
+    <!-- hiện ra 6 loading khi điều kiện loading = true -->
+        <div class="items" v-if="loading === true">
+            <div v-for="index in 6" :key="index">
+                <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    <!-- hiện ra 6 số random đã đc đặt ra từ trước khi loading = false -->
+        <div v-else class="items">
+            <div class="number" v-for="list in lists" :key="list">
+                {{ list }}
+            </div>
+        </div>
      </div>
-   </div>
    <div class="btn-button">
     <button><router-link to="/">Back to top</router-link></button>
    </div>
@@ -34,7 +42,29 @@
 
 <script>
 export default {
-  
+  data(){
+    return{
+        lists:[],
+        loading:false,
+        index: 0,
+    //     title:'Kết quả đang được tính toán!!!',
+    }
+  }, 
+  mounted() 
+    {
+       this.loading = true,
+       setTimeout(() => {
+
+        this.loading=false;
+        // this.title='Bộ số may mắn của bạn là: ';
+        for( this.index = 0; this.index < 6; this.index++){
+            let random =Math.floor(Math.random()*56+1) ;
+            this.lists.push(random);
+        }
+       },2000)
+
+    }, 
+    
 };
 </script>
 
@@ -89,7 +119,7 @@ export default {
     padding: 20px;
    
 }
-.time .items .number  {
+.time .items >.number  {
      background-color: teal; 
      margin-left: 10px;
      color:white;
@@ -112,4 +142,5 @@ button{
     padding: 5px 20px;
 
 }
+
 </style>
