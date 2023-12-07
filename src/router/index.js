@@ -1,30 +1,35 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-import Header from "@/components/Header.vue"
-import Random from "@/components/Random.vue"
-import Testbody from "@/components/Testbody.vue"
+import Header from "@/components/Header.vue";
+import Random from "@/components/Random.vue";
+import Testbody from "@/components/Testbody.vue";
+import Result from "../components/Result.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 export default new VueRouter({
-  mode: 'history',
+  mode: "history",
   routes: [
     {
-      path: '/',
-      name: 'Header',
+      path: "/",
+      name: "Header",
       component: Header
     },
     {
-      path: '/2',
-      name: 'Random',
-      component: Random,
+      path: "/2",
+      name: "Random",
+      component: Random
     },
     {
-      path: '/8',
-      name: 'TestNhanPham',
-      component: Testbody,
+      path: "/8",
+      name: "TestNhanPham",
+      component: Testbody
     },
-
+    {
+      path: "/result",
+      name: "ketqua",
+      component: Result
+    }
   ]
-})
+});
